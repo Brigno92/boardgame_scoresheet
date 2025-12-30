@@ -14,12 +14,12 @@ class DrawerMenu extends StatelessWidget {
           ListTile(
                 leading: const Icon(Icons.apps),
                 title: const Text('I miei giochi'),
-                onTap: () => onRouteSelected('/wefwbef'),
+                onTap: () => onRouteSelected('/template-list'),
               ),
               ListTile(
                 leading: const Icon(Icons.add_box_rounded),
                 title: const Text('Crea template'),
-                onTap: () => onRouteSelected('/nights-list'),
+                onTap: () => onRouteSelected('/new'),
               )
         ],
       ),

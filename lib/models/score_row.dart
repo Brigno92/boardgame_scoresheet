@@ -3,13 +3,6 @@ class ScoreRow {
   late int sheetId;
   String name = '';
   bool positiveScore = true;
-  Map<String, int> scores = {};
-  int? numberOfPlayers;
 
-  ScoreRow(List<String> playerNames) {
-    numberOfPlayers = playerNames.length;
-    for (var name in playerNames) {
-      scores[name] = 0;
-    }
-  }
+  ScoreRow(this.name, this.positiveScore);
 }
