@@ -1,4 +1,4 @@
-import 'package:boardgame_scoresheet/models/score_row.dart';
+import 'package:boardgame_scoresheet/entities/score_row.dart';
 import 'package:flutter/material.dart';
 
 class NewTemplatePage extends StatefulWidget {
@@ -9,12 +9,12 @@ class NewTemplatePage extends StatefulWidget {
 }
 
 class _NewTemplatePageState extends State<NewTemplatePage> {
-  List<ScoreRow> scoreRows = [ScoreRow('', true)];
+  List<ScoreRow> scoreRows = [ScoreRow('', true, 0, 0)];
   String gameTitle = '';
 
   void addScoreRow() {
     setState(() {
-      scoreRows.add(ScoreRow('', true));
+      scoreRows.add(ScoreRow('', true, 0, 0));
     });
   }
 

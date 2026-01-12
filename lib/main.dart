@@ -1,16 +1,8 @@
 import 'package:boardgame_scoresheet/main_page/main_menu.dart';
 import 'package:flutter/material.dart';
-import 'package:path/path.dart';
-import 'package:sqflite/sqflite.dart';
 
 void main() async{
-  final database = openDatabase(join(await getDatabasesPath(), 'boardgame_scoresheet.db'),
-  onCreate: (db, version) {
-      return db.execute(
-        'CREATE TABLE dogs(id INTEGER PRIMARY KEY, name TEXT, age INTEGER)',
-      );
-    },);
-  runApp(const MyApp());
+    runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
