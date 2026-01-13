@@ -1,20 +1,20 @@
-import 'package:boardgame_scoresheet/entities/score_row.dart';
+import 'package:boardgame_scoresheet/dtos/score_row_dto.dart';
 import 'package:flutter/material.dart';
 
 class NewTemplatePage extends StatefulWidget {
-  const NewTemplatePage({Key? key}) : super(key: key);
+  const NewTemplatePage({super.key});
 
   @override
   State<NewTemplatePage> createState() => _NewTemplatePageState();
 }
 
 class _NewTemplatePageState extends State<NewTemplatePage> {
-  List<ScoreRow> scoreRows = [ScoreRow('', true, 0, 0)];
+  List<ScoreRowDto> scoreRows = [ScoreRowDto('', true)];
   String gameTitle = '';
 
   void addScoreRow() {
     setState(() {
-      scoreRows.add(ScoreRow('', true, 0, 0));
+      scoreRows.add(ScoreRowDto('', true));
     });
   }
 

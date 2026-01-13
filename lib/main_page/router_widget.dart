@@ -22,12 +22,12 @@ class RouterWidgetState extends State<RouterWidget> {
         WidgetBuilder builder;
         switch (settings.name) {
           case '/template-list':
-            builder = (BuildContext context) => const TemplateList();
+            builder = (BuildContext context) => TemplateList();
             break;
           case '/new':
             builder = (BuildContext context) => const NewTemplatePage();
           default:
-            builder = (BuildContext context) => const TemplateList();
+            builder = (BuildContext context) => TemplateList();
         }
         return MaterialPageRoute(builder: builder, settings: settings);
       },

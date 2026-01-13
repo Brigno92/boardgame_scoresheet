@@ -3,6 +3,8 @@ import 'package:boardgame_scoresheet/main_page/router_widget.dart';
 import 'package:flutter/material.dart';
 
 class MainMenu extends StatefulWidget {
+  const MainMenu({super.key});
+
   @override
   MainMenuState createState() => MainMenuState();
 }

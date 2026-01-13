@@ -3,6 +3,8 @@ class ScoreRowDto {
   late String name;
   late bool positiveScore;
 
+  ScoreRowDto(this.name, this.positiveScore);
+
   toMap() {
     return {
       'sheetId': sheetId,

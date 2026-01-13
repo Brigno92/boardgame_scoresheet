@@ -31,9 +31,16 @@ class ScoresheetRepository {
     return db.delete('bg_sheet', where: 'id = ?', whereArgs: [id]);
   }
 
-  Future<List<Map<String, BoardgameSheet>>> getSheets() async {
+  Future<List<BoardgameSheet>> getSheets() async {
     final db = await _appDatabase.database;
-    return db.query('bg_sheet') as List<Map<String, BoardgameSheet>>;
+    final result = await db.query('bg_sheet');
+    return result.map((map) {
+      return BoardgameSheet(
+        id: map['id'] as int,
+        name: map['name'] as String,
+        maxPlayers: map['maxPlayers'] as int,
+      );
+    }).toList();
   }
 
   Future<BoardgameSheet> getSheetById(int id) async {

@@ -1,7 +1,6 @@
 import 'package:boardgame_scoresheet/controllers/app_database.dart';
 import 'package:boardgame_scoresheet/dtos/score_row_dto.dart';
 import 'package:boardgame_scoresheet/entities/score_row.dart';
-import 'package:sqflite/sqflite.dart';
 
 class ScoreRowRepository {
   final AppDatabase _appDatabase = AppDatabase();
