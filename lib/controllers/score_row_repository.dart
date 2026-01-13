@@ -6,12 +6,13 @@ import 'package:sqflite/sqflite.dart';
 class ScoreRowRepository {
   final AppDatabase _appDatabase = AppDatabase();
 
-  Future<int> insertRow(ScoreRowDto rowDto) async {
+  Future<int> insertRows(List<ScoreRowDto> rowDtos) async {
     final db = await _appDatabase.database;
-    return db.insert(
-      'score_row',
-      rowDto.toMap()
-    );
+    var result = 1;
+    for (var row in rowDtos) {
+      result = await db.insert('score_row', row.toMap());
+    }
+    return result;
   }
 
   Future<int> updateRow(int id, ScoreRowDto rowDto) async {
@@ -20,17 +21,13 @@ class ScoreRowRepository {
       'score_row',
       rowDto.toMap(),
       where: 'id = ?',
-      whereArgs: [id]
+      whereArgs: [id],
     );
   }
 
   Future<int> deleteRow(int id) async {
     final db = await _appDatabase.database;
-    return db.delete(
-      'score_row',
-      where: 'id = ?',
-      whereArgs: [id],
-    );
+    return db.delete('score_row', where: 'id = ?', whereArgs: [id]);
   }
 
   Future<List<Map<String, ScoreRow>>> getRows() async {
@@ -40,6 +37,7 @@ class ScoreRowRepository {
 
   Future<List<Map<String, ScoreRow>>> getRowById(int id) async {
     final db = await _appDatabase.database;
-    return db.query('score_row', where: 'id = $id') as List<Map<String, ScoreRow>>;
+    return db.query('score_row', where: 'id = $id')
+        as List<Map<String, ScoreRow>>;
   }
 }
