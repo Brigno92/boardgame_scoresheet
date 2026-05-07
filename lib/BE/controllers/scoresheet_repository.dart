@@ -1,7 +1,7 @@
-import 'package:boardgame_scoresheet/controllers/app_database.dart';
-import 'package:boardgame_scoresheet/dtos/scoresheet_dto.dart';
-import 'package:boardgame_scoresheet/entities/boardgame_sheet.dart';
-import 'package:boardgame_scoresheet/entities/score_row.dart';
+import 'package:boardgame_scoresheet/BE/controllers/app_database.dart';
+import 'package:boardgame_scoresheet/BE/dtos/scoresheet_dto.dart';
+import 'package:boardgame_scoresheet/BE/entities/boardgame_sheet.dart';
+import 'package:boardgame_scoresheet/BE/entities/score_row.dart';
 import 'package:sqflite/sqflite.dart';
 
 class ScoresheetRepository {

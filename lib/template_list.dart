@@ -1,5 +1,5 @@
-import 'package:boardgame_scoresheet/controllers/scoresheet_repository.dart';
-import 'package:boardgame_scoresheet/entities/boardgame_sheet.dart';
+import 'package:boardgame_scoresheet/BE/controllers/scoresheet_repository.dart';
+import 'package:boardgame_scoresheet/BE/entities/boardgame_sheet.dart';
 import 'package:flutter/material.dart';
 
 class TemplateList extends StatefulWidget{

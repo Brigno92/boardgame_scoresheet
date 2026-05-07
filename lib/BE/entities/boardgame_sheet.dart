@@ -1,4 +1,4 @@
-import 'package:boardgame_scoresheet/entities/score_row.dart';
+import 'package:boardgame_scoresheet/BE/entities/score_row.dart';
 
 class BoardgameSheet {
     final int id;

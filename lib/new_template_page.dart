@@ -1,4 +1,4 @@
-import 'package:boardgame_scoresheet/dtos/score_row_dto.dart';
+import 'package:boardgame_scoresheet/BE/dtos/score_row_dto.dart';
 import 'package:flutter/material.dart';
 
 class NewTemplatePage extends StatefulWidget {
