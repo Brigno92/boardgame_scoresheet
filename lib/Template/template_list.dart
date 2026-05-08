@@ -1,10 +1,11 @@
 import 'package:boardgame_scoresheet/BE/controllers/scoresheet_repository.dart';
 import 'package:boardgame_scoresheet/BE/entities/boardgame_sheet.dart';
+import 'package:boardgame_scoresheet/Services/navigation_service.dart';
 import 'package:flutter/material.dart';
 
-class TemplateList extends StatefulWidget{
+class TemplateList extends StatefulWidget {
   const TemplateList({super.key});
-  
+
   @override
   State<TemplateList> createState() => _TemplateListState();
 }
@@ -12,7 +13,7 @@ class TemplateList extends StatefulWidget{
 class _TemplateListState extends State<TemplateList> {
   final ScoresheetRepository _repository = ScoresheetRepository();
 
-  late List<BoardgameSheet> _sheets;
+  late List<BoardgameSheet> _sheets = [];
 
   @override
   void initState() {
@@ -27,7 +28,6 @@ class _TemplateListState extends State<TemplateList> {
     });
   }
 
-  
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -36,6 +36,9 @@ class _TemplateListState extends State<TemplateList> {
           return ListTile(
             title: Text(sheet.name),
             subtitle: Text('Max Players: ${sheet.maxPlayers}'),
+            onTap: () {
+              NavigationService.instance.pushNamed('/template-details', sheet.id);
+            },
           );
         }).toList(),
       ),

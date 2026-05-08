@@ -1,5 +1,5 @@
 class ScoreRowDto {
-  late int sheetId;
+  late int sheetId = 0;
   late String name;
   late bool positiveScore;
 

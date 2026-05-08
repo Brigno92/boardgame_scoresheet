@@ -5,6 +5,8 @@ class ScoresheetDto {
   late int maxPlayers;
   late List<ScoreRowDto> scoreRows;
 
+  ScoresheetDto(this.name, this.maxPlayers, this.scoreRows);
+
   toMap() {
     return {
       'name': name,

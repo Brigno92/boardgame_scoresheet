@@ -1,12 +1,10 @@
-import 'package:boardgame_scoresheet/new_template_page.dart';
-import 'package:boardgame_scoresheet/template_list.dart';
+import 'package:boardgame_scoresheet/Services/navigation_service.dart';
+import 'package:boardgame_scoresheet/Template/template_page.dart';
+import 'package:boardgame_scoresheet/Template/template_list.dart';
 import 'package:flutter/material.dart';
 
 class RouterWidget extends StatefulWidget {
-  const RouterWidget(GlobalKey<NavigatorState> bodyNavigatorKey, {super.key})
-    : _bodyNavigatorKey = bodyNavigatorKey;
-
-  final GlobalKey<NavigatorState> _bodyNavigatorKey;
+  const RouterWidget({super.key});
 
   @override
   RouterWidgetState createState() => RouterWidgetState();
@@ -16,7 +14,7 @@ class RouterWidgetState extends State<RouterWidget> {
   @override
   Widget build(BuildContext context) {
     return Navigator(
-      key: widget._bodyNavigatorKey,
+      key: NavigationService.instance.navigatorKey,
       initialRoute: '/template-list',
       onGenerateRoute: (RouteSettings settings) {
         WidgetBuilder builder;
@@ -25,9 +23,15 @@ class RouterWidgetState extends State<RouterWidget> {
             builder = (BuildContext context) => TemplateList();
             break;
           case '/new':
-            builder = (BuildContext context) => const NewTemplatePage();
+            builder = (BuildContext context) => const TemplatePage();
+            break;
+          case '/template-details':
+            final id = settings.arguments as int?;
+            builder = (BuildContext context) => TemplatePage(templateId: id);
+            break;
           default:
             builder = (BuildContext context) => TemplateList();
+            break;
         }
         return MaterialPageRoute(builder: builder, settings: settings);
       },

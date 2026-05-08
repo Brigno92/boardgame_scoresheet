@@ -1,3 +1,4 @@
+import 'package:boardgame_scoresheet/Services/navigation_service.dart';
 import 'package:boardgame_scoresheet/main_page/menu_drawer.dart';
 import 'package:boardgame_scoresheet/main_page/router_widget.dart';
 import 'package:flutter/material.dart';
@@ -11,7 +12,7 @@ class MainMenu extends StatefulWidget {
 
 class MainMenuState extends State {
 
-  final GlobalKey<NavigatorState> bodyNavigatorKey = GlobalKey<NavigatorState>();
+  
 
   @override
   Widget build(BuildContext context) {
@@ -20,14 +21,11 @@ class MainMenuState extends State {
       drawer: DrawerMenu(
       onRouteSelected: (routeName) {
         Navigator.pop(context); // Chiudi il drawer
-        bodyNavigatorKey.currentState?.pushNamed(routeName);
+        NavigationService.instance.pushNamed(routeName);
       },
     ),
       backgroundColor: const Color.fromARGB(255, 217, 243, 255),
-      body: RouterWidget(bodyNavigatorKey),
-      floatingActionButton: FloatingActionButton(
-        onPressed: createNewNight(),
-      ),
+      body: RouterWidget(),
     );
   }
 

@@ -7,13 +7,32 @@ import 'package:sqflite/sqflite.dart';
 class ScoresheetRepository {
   final AppDatabase _appDatabase = AppDatabase();
 
-  Future<int> upsertSheet(Map<String, BoardgameSheet> item) async {
+  Future<int> updateSheet(int sheetId, ScoresheetDto dto) async {
     final db = await _appDatabase.database;
-    return db.insert(
-      'bg_sheet',
-      item,
-      conflictAlgorithm: ConflictAlgorithm.replace,
-    );
+
+    return await db.transaction((txn) async {
+      // 1. UPDATE SHEET
+      await txn.update(
+        'bg_sheet',
+        BoardgameSheet.fromDto(dto, id: sheetId).toMap(),
+        where: 'id = ?',
+        whereArgs: [sheetId],
+      );
+
+      // 2. DELETE OLD ROWS
+      await txn.delete(
+        'score_row',
+        where: 'sheetId = ?',
+        whereArgs: [sheetId],
+      );
+
+      // 3. INSERT NEW ROWS
+      for (final row in dto.scoreRows) {
+        await txn.insert('score_row', row.toMap());
+      }
+
+      return sheetId;
+    });
   }
 
   Future<int> createSheet(ScoresheetDto dto) async {
@@ -45,20 +64,20 @@ class ScoresheetRepository {
 
   Future<BoardgameSheet> getSheetById(int id) async {
     final db = await _appDatabase.database;
-    var sheet =
-        db.query('bg_sheet', where: 'id = $id')
-            as List<Map<String, BoardgameSheet>>;
-    var rows =
-        db.query('score_row', where: 'sheetId = $id')
-            as List<Map<String, ScoreRow>>;
+    var sheet = await db.query('bg_sheet', where: 'id = $id', limit: 1);
+    var rows = await db.query('score_row', where: 'sheetId = $id');
     var returnSheet = BoardgameSheet(
-      id: id,
+      id: sheet.first['id'] as int,
       name: sheet.first['name'] as String,
       maxPlayers: sheet.first['maxPlayers'] as int,
     );
-    returnSheet.scoreRows = rows.map((rowMap) {
-      var row = rowMap['score_row']!;
-      return ScoreRow(row.name, row.positiveScore, row.id, row.sheetId);
+    returnSheet.scoreRows = rows.map((row) {
+      return ScoreRow(
+        row['name'] as String,
+        row['positiveScore'] == 1,
+        row['id'] as int,
+        row['sheetId'] as int,
+      );
     }).toList();
 
     return returnSheet;
